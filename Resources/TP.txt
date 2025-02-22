@@ -1,0 +1,10 @@
+﻿
+for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+   if v.Name ~= game.Players.LocalPlayer.Name and player ~= "" then
+       if v.Name == player or v.DisplayName == player or v.DisplayName:find(player)  or v.Name:find(player) or v.Name:find(string.upper(string.sub(player,1,1))) or v.Name:find(string.lower(player)) or v.Name:find(string.upper(player))  then
+           if v.Character ~= nil and v.Character:FindFirstChild("HumanoidRootPart") and game:GetService('Players').LocalPlayer.Character ~= nil and game:GetService('Players').LocalPlayer.Character:FindFirstChild("Humanoid") then
+           game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame - Vector3.new(0,0,-2)
+               end
+           end
+       end
+   end

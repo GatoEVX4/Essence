@@ -1,0 +1,22 @@
+﻿if _G.EvoClickTP == nil then
+	_G.EvoClickTP = true
+	
+	local player = game:GetService("Players").LocalPlayer
+	local UserInputService = game:GetService("UserInputService")
+	local mouse = player:GetMouse()
+
+	repeat wait() until mouse
+	
+	UserInputService.InputBegan:Connect(function(input, gameProcessed)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+
+			if _G.EvoClickTP and UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
+				player.Character:MoveTo(Vector3.new(mouse.Hit.x, mouse.Hit.y, mouse.Hit.z)) 
+			end
+		end
+	end)
+
+
+else
+	_G.EvoClickTP = nil
+end

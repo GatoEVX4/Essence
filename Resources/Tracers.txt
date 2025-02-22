@@ -1,0 +1,77 @@
+-- Variável global para alternar o estado do script Tracers
+if _G.TracersEnabled == nil then
+    _G.TracersEnabled = true
+
+    -- Serviços
+    local Players = game:GetService("Players")
+    local RunService = game:GetService("RunService")
+    local LocalPlayer = Players.LocalPlayer
+    local Camera = workspace.CurrentCamera
+
+    -- Tabela para armazenar os tracers
+    _G.TracerObjects = _G.TracerObjects or {}
+
+    -- Função para criar um tracer
+    local function createTracer(player)
+        if player == LocalPlayer then return end -- Ignorar o jogador local
+
+        local tracerLine = Drawing.new("Line")
+        tracerLine.Thickness = 1
+        tracerLine.Transparency = 1
+        tracerLine.Color = Color3.fromRGB(100, 100, 100) -- Cor branca padrão
+
+        -- Adicionar à tabela de tracers
+        table.insert(_G.TracerObjects, tracerLine)
+
+        local function updateTracer()
+            if not tracerLine.Visible or not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then
+                tracerLine.Visible = false
+                return
+            end
+
+            local rootPart = player.Character.HumanoidRootPart
+            local screenPos, onScreen = Camera:WorldToViewportPoint(rootPart.Position)
+
+            if onScreen then
+                tracerLine.Visible = true
+                tracerLine.From = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y) -- Parte inferior da tela
+                tracerLine.To = Vector2.new(screenPos.X, screenPos.Y) -- Posição do jogador na tela
+            else
+                tracerLine.Visible = false
+            end
+        end
+
+        -- Atualizar o tracer em cada frame
+        RunService.RenderStepped:Connect(updateTracer)
+
+        -- Remover o tracer quando o jogador sair
+        player.AncestryChanged:Connect(function()
+            if not player:IsDescendantOf(game) then
+                tracerLine:Remove()
+            end
+        end)
+    end
+
+    -- Criar tracers para todos os jogadores no jogo
+    for _, player in ipairs(Players:GetPlayers()) do
+        createTracer(player)
+    end
+
+    -- Criar tracers para jogadores que entrarem posteriormente
+    Players.PlayerAdded:Connect(function(player)
+        player.CharacterAdded:Connect(function()
+            createTracer(player)
+        end)
+    end)
+
+else
+    -- Desativar e remover apenas os tracers
+    _G.TracersEnabled = nil
+
+    if _G.TracerObjects then
+        for _, tracer in ipairs(_G.TracerObjects) do
+            tracer:Remove()
+        end
+        _G.TracerObjects = nil -- Limpar a tabela
+    end
+end

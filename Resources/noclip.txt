@@ -1,0 +1,32 @@
+﻿local player = game.Players.LocalPlayer
+while not player.Character do
+    wait()
+end
+
+
+if _G.EvoEnvClip == nil then
+    _G.EvoEnvClip = true
+
+    local function ApplyNoclip()
+        if _G.EvoEnvClip then
+            for i, v in pairs(player.Character:GetChildren()) do
+                if v:IsA("BasePart") then
+                    v.CanCollide = false
+                end
+            end
+        end
+    end
+
+    local function UpdateNoclip()
+        ApplyNoclip()
+    end
+
+    game:GetService("RunService").Stepped:Connect(UpdateNoclip)
+else
+    _G.EvoEnvClip = nil
+    for i, v in pairs(player.Character:GetChildren()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = true
+        end
+    end
+end

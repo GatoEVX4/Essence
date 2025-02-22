@@ -1,0 +1,68 @@
+-- Variável global para alternar o estado do script ESP
+if _G.EvoEnvESP == nil then
+    _G.EvoEnvESP = true
+
+-- Services
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+-- Function to get the color based on the player's team
+local function getTeamColor(player)
+    if player.Team then
+        return player.TeamColor.Color
+    else
+        return Color3.fromRGB(128, 128, 128) -- Gray color for players with no team
+    end
+end
+
+-- Function to create a highlight for a player
+local function createESP(player)
+    local highlight = Instance.new("Highlight")
+    highlight.Name = "PlayerESP"
+    highlight.FillColor = getTeamColor(player)
+    highlight.OutlineColor = Color3.new(1, 1, 1) -- White color for outline
+    highlight.FillTransparency = 0.5
+    highlight.OutlineTransparency = 0
+    highlight.Parent = player.Character or player.CharacterAdded:Wait()
+
+    -- Update the highlight when the player's character respawns
+    player.CharacterAdded:Connect(function(character)
+        highlight.Parent = character
+    end)
+
+    -- Update the highlight color if the player's team changes
+    player:GetPropertyChangedSignal("Team"):Connect(function()
+        highlight.FillColor = getTeamColor(player)
+    end)
+end
+
+-- Apply ESP to all players currently in the game
+for _, player in pairs(Players:GetPlayers()) do
+    if player ~= Players.LocalPlayer then -- Avoid highlighting the local player
+        createESP(player)
+    end
+end
+
+-- Apply ESP to players joining later
+Players.PlayerAdded:Connect(function(player)
+    if player ~= Players.LocalPlayer then
+        player.CharacterAdded:Connect(function(character)
+            createESP(player)
+        end)
+    end
+end)
+
+-- Remove ESP when a player leaves
+Players.PlayerRemoving:Connect(function(player)
+    if player.Character and player.Character:FindFirstChild("PlayerESP") then
+        player.Character.PlayerESP:Destroy()
+    end
+end)
+
+else
+    _G.EvoEnvESP = nil
+    local Folder = game:GetService("CoreGui"):FindFirstChild("")
+    if Folder then
+        Folder:Destroy()
+    end
+end

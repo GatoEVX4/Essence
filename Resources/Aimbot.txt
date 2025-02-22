@@ -1,0 +1,138 @@
+
+-- Variável global para alternar o script
+if _G.AimbotEnabled == nil then
+    _G.AimbotEnabled = true
+
+    -- Variáveis locais para referenciar as configurações globais
+    local settings = _G.AimbotSettings
+
+    -- FOV Circle
+    local fovCircle = Drawing.new("Circle")
+    fovCircle.Visible = false
+    fovCircle.Radius = settings.fovRadius
+    fovCircle.Color = settings.fovColor
+    fovCircle.Thickness = settings.fovThickness
+    fovCircle.Position = Vector2.new(workspace.CurrentCamera.ViewportSize.X / 2, workspace.CurrentCamera.ViewportSize.Y / 2)
+
+    local currentTarget = nil
+
+    local function isInFOV(targetPosition, camera)
+        local screenPoint = camera:WorldToViewportPoint(targetPosition)
+        local screenCenter = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
+        local distanceFromCenter = (Vector2.new(screenPoint.X, screenPoint.Y) - screenCenter).Magnitude
+        return screenPoint.Z > 0 and distanceFromCenter < settings.fovRadius
+    end
+
+    local function shouldAvoidAimingAt(player)
+        if settings.teamCheck then
+            if player.Team then
+                if player.Team == game.Players.LocalPlayer.Team then
+                    return true
+                end
+                if settings.useWhitelistedTeams then
+                    for _, teamName in pairs(settings.whitelistedTeams) do
+                        if player.Team.Name == teamName then
+                            return true
+                        end
+                    end
+                end
+            end
+        end
+        for _, playerName in pairs(settings.whitelistedPlayers) do
+            if player.Name == playerName then
+                return true
+            end
+        end
+        return false
+    end
+
+    local function findClosestTarget(camera)
+        local closestPlayer = nil
+        local closestDistance = settings.fovRadius
+
+        for _, player in pairs(game.Players:GetPlayers()) do
+            if player ~= game.Players.LocalPlayer and not shouldAvoidAimingAt(player) then
+                local character = player.Character
+                if character and character:FindFirstChild("HumanoidRootPart") and character:FindFirstChild(settings.aimPart) then
+                    local targetPosition = character.HumanoidRootPart.Position
+                    if isInFOV(targetPosition, camera) then
+                        local screenPoint = camera:WorldToViewportPoint(targetPosition)
+                        local distanceFromCenter = (Vector2.new(screenPoint.X, screenPoint.Y) - fovCircle.Position).Magnitude
+                        if distanceFromCenter < closestDistance then
+                            closestPlayer = character
+                            closestDistance = distanceFromCenter
+                        end
+                    end
+                end
+            end
+        end
+
+        return closestPlayer
+    end
+
+    local function aimAt(target)
+        if not target then return end
+        local targetPart = target:FindFirstChild(settings.aimPart)
+        if not targetPart then return end
+        local targetPosition = targetPart.Position
+        local camera = workspace.CurrentCamera
+        
+        local aimDirection = (targetPosition - camera.CFrame.Position).unit
+        local newCFrame = CFrame.new(camera.CFrame.Position, camera.CFrame.Position + aimDirection)
+        
+        camera.CFrame = newCFrame
+    end
+
+    local runConnection
+    runConnection = game:GetService("RunService").RenderStepped:Connect(function()
+        if not _G.AimbotEnabled then
+            runConnection:Disconnect()
+            fovCircle:Remove()
+            return
+        end
+
+        if settings.aimbotEnabled then
+            fovCircle.Position = Vector2.new(workspace.CurrentCamera.ViewportSize.X / 2, workspace.CurrentCamera.ViewportSize.Y / 2)
+            fovCircle.Visible = true
+
+            local camera = workspace.CurrentCamera
+
+            if currentTarget and currentTarget.Parent then
+                if isInFOV(currentTarget.HumanoidRootPart.Position, camera) then
+                    aimAt(currentTarget)
+                else
+                    currentTarget = findClosestTarget(camera)
+                    if currentTarget then
+                        aimAt(currentTarget)
+                    end
+                end
+            else
+                currentTarget = findClosestTarget(camera)
+                if currentTarget then
+                    aimAt(currentTarget)
+                end
+            end
+        else
+            fovCircle.Visible = false
+            currentTarget = nil
+        end
+    end)
+
+    game:GetService("UserInputService").InputBegan:Connect(function(input)
+        if input.KeyCode == settings.aimbotKey then
+            settings.aimbotEnabled = not settings.aimbotEnabled
+            fovCircle.Visible = settings.aimbotEnabled
+            if not settings.aimbotEnabled then
+                currentTarget = nil
+            end
+        end
+    end)
+
+else
+    -- Desativar o script e remover objetos
+    _G.AimbotEnabled = nil
+    _G.AimbotSettings = nil
+    if fovCircle then
+        fovCircle:Remove()
+    end
+end

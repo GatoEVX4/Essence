@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="Essence.Elements.SpecialScripts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Essence"
+             mc:Ignorable="d"  Margin="0" Foreground="{x:Null}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="Red" SecondaryColor="Red" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedButton}" />
+
+            <Storyboard x:Key="FadeIn">
+                <DoubleAnimation  Name="FadeIn"
+                              Storyboard.TargetName="CopiedMsg"
+                              Storyboard.TargetProperty="(Window.Opacity)"
+                              From="0.0"
+                              To="1.0"
+                              Duration="0:0:0.25"
+                              AutoReverse="False"
+                              RepeatBehavior="1x" />
+            </Storyboard>
+
+            <!-- Mouse Enter Animation -->
+            <Storyboard x:Key="MouseEnterStoryboard">
+                <!--<DoubleAnimation Storyboard.TargetProperty="Width" To="197" Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>-->
+                <DoubleAnimation Storyboard.TargetProperty="Height" To="87" Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+
+            <!-- Mouse Leave Animation -->
+            <Storyboard x:Key="MouseLeaveStoryboard">
+                <!--<DoubleAnimation Storyboard.TargetProperty="Width" To="197" Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>-->
+                <DoubleAnimation Storyboard.TargetProperty="Height" To="78" Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border CornerRadius="3" Height="78" Width="197" BorderBrush="#19A5A5A5" BorderThickness="1" Margin="3" Background="Black">
+
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard Storyboard="{StaticResource MouseEnterStoryboard}"/>
+            </EventTrigger>
+
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard Storyboard="{StaticResource MouseLeaveStoryboard}"/>
+            </EventTrigger>
+        </Border.Triggers>
+
+        <Grid>
+            <Label x:Name="ScriptTitle" Content="Essence" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFD2D2D2" Margin="77.25,0,0,50" FontFamily="Calibri" FontWeight="Bold" FontSize="14" Grid.ColumnSpan="4"/>
+            <Label x:Name="Credit" Content="Verified by Essence" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFC8C8C8" Margin="77.25,0,0,17" FontSize="10" Grid.ColumnSpan="4"/>
+            <Button x:Name="ExecuteBtn" BorderThickness="0"  materialDesign:ButtonAssist.CornerRadius="5"  Content="Execute" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" Style="{StaticResource MaterialDesignFlatDarkBgButton}" HorizontalAlignment="Center" Margin="77.25,30,0,0" VerticalAlignment="Center" Width="100" FontSize="14" Foreground="White" BorderBrush="{x:Null}" Background="#FFBA000D" Height="27" />
+
+            <Border x:Name="BorderImg" Width="77.25" HorizontalAlignment="Left" CornerRadius="5,0,0,5">
+                <Border.Background>
+                    <ImageBrush ImageSource="https://infyiff.github.io/resources/Logo_Small.png" Stretch="Uniform"/>
+                </Border.Background>
+            </Border>
+            
+            <Polygon Points="52,0 52,85 35,85" Fill="#FF1A1A1A" StrokeThickness="2" HorizontalAlignment="Left" Margin="26,0,0,0" Width="52" Stroke="#FFC8C8C8"/>
+
+            <Polygon Points="52,0 52,85 35,85" Fill="Black" HorizontalAlignment="Left" Margin="26,0,0,0" Width="52"/>
+
+            <!--<Path Stretch="UniformToFill" Data="M 4.109 14 L 7.793 1 L 14.292 0.968 L 14.249 14 L 4.109 14 Z" Fill="#FF1A1A1A" HorizontalAlignment="Left" Margin="56,-3,0,0" Width="22"/>-->
+        </Grid>
+    </Border>
+</UserControl>

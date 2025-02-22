@@ -1,0 +1,43 @@
+﻿<Window x:Class="Essence.Elements.SexyNotification"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Essence.Elements"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ShowInTaskbar="False"
+        Title="SexyNotification"
+        Topmost="True" Width="400" Height="80" Background="{x:Null}">
+    <Grid Width="400" ClipToBounds="True">
+        <Border x:Name="dunw3udqnu" Background="#FF0A0A0A" ClipToBounds="True" CornerRadius="10" BorderBrush="#FF141414" BorderThickness="1" Margin="185,75,185,-25">
+            <Grid>
+                <Grid.Clip>
+                    <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,400,80"/>
+                </Grid.Clip>
+                <!--<Image Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" Opacity="0.1">
+                    <Image.Source>
+                        <FormatConvertedBitmap Source="/background.png" DestinationFormat="Gray8"/>
+                    </Image.Source>
+                </Image>-->
+                <Image x:Name="dhnwedunwnd" Source="/essence.png" RenderOptions.BitmapScalingMode="HighQuality" MaxWidth="36" Margin="20,10,22,10" RenderTransformOrigin="0.5,0.5"/>
+            </Grid>
+        </Border>
+
+        <Border x:Name="dafsdfdsfd" Loaded="dafsdfdsfd_Loaded" Background="#FF0A0A0A" ClipToBounds="True" CornerRadius="10" BorderBrush="#FF141414" BorderThickness="1" Width="400" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center" d:IsHidden="True">
+            <Grid>
+                <Grid.Clip>
+                    <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,400,80"/>
+                </Grid.Clip>
+                <Image Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" Opacity="0.1">
+                    <Image.Source>
+                        <FormatConvertedBitmap Source="/background.png" DestinationFormat="Gray8"/>
+                    </Image.Source>
+                </Image>
+                <Border VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,5" Height="3" Width="200" Background="#FFC8C8C8" CornerRadius="0.5" Visibility="Collapsed"/>
+                <TextBlock x:Name="ieanfjeanfifnuineufenafn" TextWrapping="Wrap" FontFamily="/Essence;component/Fonts/#Poppins Medium" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" TextAlignment="Center" Foreground="#FFC8C8C8" Text="Welcome to Essence M4A1"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

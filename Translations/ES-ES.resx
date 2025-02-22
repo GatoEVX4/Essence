@@ -1,0 +1,528 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Connecting" xml:space="preserve">
+    <value>Conectando</value>
+  </data>
+  <data name="This is taking longer than expected..." xml:space="preserve">
+    <value>Esto está tomando más tiempo de lo esperado...</value>
+  </data>
+  <data name="Ehh... Sorry for that" xml:space="preserve">
+    <value>Ehh... Lo siento por eso</value>
+  </data>
+  <data name="Bruh. Opening the error window..." xml:space="preserve">
+    <value>Vaya. Abriendo la ventana de error...</value>
+  </data>
+  <data name="Checking Maintence status" xml:space="preserve">
+    <value>Comprobando el estado de mantenimiento</value>
+  </data>
+  <data name="Checking Version" xml:space="preserve">
+    <value>Comprobando la versión</value>
+  </data>
+  <data name="Download failed. try to disable your antivirus software" xml:space="preserve">
+    <value>Error en la descarga. Intente desactivar su software antivirus</value>
+  </data>
+  <data name="We're updating our services. Please try again later." xml:space="preserve">
+    <value>Estamos actualizando nuestros servicios. Por favor, inténtelo más tarde.</value>
+  </data>
+  <data name="Loading User Data" xml:space="preserve">
+    <value>Cargando datos del usuario</value>
+  </data>
+  <data name="Loading Changelog..." xml:space="preserve">
+    <value>Cargando registro de cambios...</value>
+  </data>
+  <data name="Loading EULA..." xml:space="preserve">
+    <value>Cargando EULA...</value>
+  </data>
+  <data name="Preparing First Run..." xml:space="preserve">
+    <value>Preparando la primera ejecución...</value>
+  </data>
+  <data name="Getting Roblox Info" xml:space="preserve">
+    <value>Obteniendo información de Roblox</value>
+  </data>
+  <data name="Checking Login" xml:space="preserve">
+    <value>Verificando inicio de sesión</value>
+  </data>
+  <data name="Loading Settings" xml:space="preserve">
+    <value>Cargando configuraciones</value>
+  </data>
+  <data name="Loading AI Conversations" xml:space="preserve">
+    <value>Cargando conversaciones de la IA</value>
+  </data>
+  <data name="Starting UI..." xml:space="preserve">
+    <value>Iniciando UI...</value>
+  </data>
+  <data name="Login Premium - Permanent" xml:space="preserve">
+    <value>Inicio de sesión Premium - Permanente</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Premium Login (ADM)" xml:space="preserve">
+    <value>Inicio de sesión Premium (ADM)</value>
+  </data>
+  <data name="Linkvertise key" xml:space="preserve">
+    <value>Clave de Linkvertise</value>
+  </data>
+  <data name="Good Morning" xml:space="preserve">
+    <value>Buenos días</value>
+  </data>
+  <data name="Good Afternoon" xml:space="preserve">
+    <value>Buenas tardes</value>
+  </data>
+  <data name="Good Evening" xml:space="preserve">
+    <value>Buenas noches</value>
+  </data>
+  <data name="Good Night" xml:space="preserve">
+    <value>Buenas noches</value>
+  </data>
+  <data name="Intermission" xml:space="preserve">
+    <value>Intermedio</value>
+  </data>
+  <data name="Playlist Empty." xml:space="preserve">
+    <value>Lista de reproducción vacía.</value>
+  </data>
+  <data name="Join our music event for free key!" xml:space="preserve">
+    <value>¡Únase a nuestro evento musical para obtener una clave gratis!</value>
+  </data>
+  <data name="users listening: " xml:space="preserve">
+    <value>usuarios escuchando: </value>
+  </data>
+  <data name="Skipping music..." xml:space="preserve">
+    <value>Saltando música...</value>
+  </data>
+  <data name="Loading Next..." xml:space="preserve">
+    <value>Cargando siguiente...</value>
+  </data>
+  <data name="Suggested by: " xml:space="preserve">
+    <value>Sugerido por: </value>
+  </data>
+  <data name="New Scripts" xml:space="preserve">
+    <value>Nuevos guiones</value>
+  </data>
+  <data name="Filtering results with AI..." xml:space="preserve">
+    <value>Filtrando resultados con IA...</value>
+  </data>
+  <data name="Scripts for this game version: " xml:space="preserve">
+    <value>Guiones para esta versión del juego: </value>
+  </data>
+  <data name="Scripts for past versions of this game: " xml:space="preserve">
+    <value>Guiones para versiones anteriores de este juego: </value>
+  </data>
+  <data name=" (Deep Searching Scripts...)" xml:space="preserve">
+    <value> (Búsqueda profunda de guiones...)</value>
+  </data>
+  <data name="Scripts for this game: Loading..." xml:space="preserve">
+    <value>Guiones para este juego: Cargando...</value>
+  </data>
+  <data name="Players online: Loading..." xml:space="preserve">
+    <value>Jugadores en línea: Cargando...</value>
+  </data>
+  <data name="Searching..." xml:space="preserve">
+    <value>Buscando...</value>
+  </data>
+  <data name=" (Searching Scripts...)" xml:space="preserve">
+    <value> (Buscando guiones...)</value>
+  </data>
+  <data name="Players online: " xml:space="preserve">
+    <value>Jugadores en línea: </value>
+  </data>
+  <data name="(loading...)" xml:space="preserve">
+    <value>(cargando...)</value>
+  </data>
+  <data name="Games you play" xml:space="preserve">
+    <value>Juegos que juegas</value>
+  </data>
+  <data name="Suggested games" xml:space="preserve">
+    <value>Juegos sugeridos</value>
+  </data>
+  <data name="--AI will output scripts here" xml:space="preserve">
+    <value>--La IA mostrará los guiones aquí</value>
+  </data>
+  <data name="Welcome User!" xml:space="preserve">
+    <value>¡Bienvenido Usuario!</value>
+  </data>
+  <data name="Our AI is ready to help you!" xml:space="preserve">
+    <value>¡Nuestra IA está lista para ayudarte!</value>
+  </data>
+  <data name="Game ID: " xml:space="preserve">
+    <value>ID del juego: </value>
+  </data>
+  <data name="Getting Game Name..." xml:space="preserve">
+    <value>Obteniendo nombre del juego...</value>
+  </data>
+  <data name="Scripts for this game: " xml:space="preserve">
+    <value>Guiones para este juego: </value>
+  </data>
+  <data name="Player ID: " xml:space="preserve">
+    <value>ID del jugador: </value>
+  </data>
+  <data name="Current User: " xml:space="preserve">
+    <value>Usuario actual: </value>
+  </data>
+  <data name="Exact Matches for" xml:space="preserve">
+    <value>Coincidencias exactas para</value>
+  </data>
+  <data name="Results for" xml:space="preserve">
+    <value>Resultados para</value>
+  </data>
+  <data name="Playing " xml:space="preserve">
+    <value>Jugando </value>
+  </data>
+  <data name="Home Page" xml:space="preserve">
+    <value>Página Principal</value>
+  </data>
+  <data name="Game ID: None" xml:space="preserve">
+    <value>ID del juego: Ninguno</value>
+  </data>
+  <data name="Waiting for user to join a game." xml:space="preserve">
+    <value>Esperando que el usuario se una a un juego.</value>
+  </data>
+  <data name="Making Request..." xml:space="preserve">
+    <value>Haciendo solicitud...</value>
+  </data>
+  <data name="AI is thinking..." xml:space="preserve">
+    <value>La IA está pensando...</value>
+  </data>
+  <data name="Digite o script aqui." xml:space="preserve">
+    <value>Escriba el guion aquí.</value>
+  </data>
+  <data name="Aimbot, ESP e mais coisas na próxima atualização" xml:space="preserve">
+    <value>Aimbot, ESP y más cosas en la próxima actualización</value>
+  </data>
+  <data name="Talk to assistent here" xml:space="preserve">
+    <value>Habla con el asistente aquí</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hola</value>
+  </data>
+  <data name="Hello User" xml:space="preserve">
+    <value>Hola Usuario</value>
+  </data>
+  <data name="Search scripts" xml:space="preserve">
+    <value>Buscar guiones</value>
+  </data>
+  <data name="Preparing First Run.." xml:space="preserve">
+    <value>Preparando la primera ejecución..</value>
+  </data>
+  <data name="Set WalkSpeed " xml:space="preserve">
+    <value>Establecer velocidad de caminar </value>
+  </data>
+  <data name="Set JumpPower " xml:space="preserve">
+    <value>Establecer poder de salto </value>
+  </data>
+  <data name="Copy Script" xml:space="preserve">
+    <value>Copiar guion</value>
+  </data>
+  <data name="Copied" xml:space="preserve">
+    <value>Copiado</value>
+  </data>
+  <data name="Synced with your discord" xml:space="preserve">
+    <value>Sincronizado con tu Discord</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continuar</value>
+  </data>
+  <data name="Insert an image link here!" xml:space="preserve">
+    <value>¡Inserta un enlace de imagen aquí!</value>
+  </data>
+  <data name="All Done!" xml:space="preserve">
+    <value>¡Todo listo!</value>
+  </data>
+  <data name="Now Your Essence are Fully Configured" xml:space="preserve">
+    <value>Ahora tu Essence está completamente configurado</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>Omitir</value>
+  </data>
+  <data name="Profile Picture" xml:space="preserve">
+    <value>Foto de perfil</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Nombre de usuario</value>
+  </data>
+  <data name="Verify using Discord" xml:space="preserve">
+    <value>Verifica usando Discord</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Correo electrónico</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="Profile Settings" xml:space="preserve">
+    <value>Configuración de perfil</value>
+  </data>
+  <data name="Customize your account" xml:space="preserve">
+    <value>Personaliza tu cuenta</value>
+  </data>
+  <data name="Welcome, we are grateful to have you with us!" xml:space="preserve">
+    <value>¡Bienvenido, estamos agradecidos de tenerte con nosotros!</value>
+  </data>
+  <data name="Verify to access our services" xml:space="preserve">
+    <value>Verifica para acceder a nuestros servicios</value>
+  </data>
+  <data name="Lets Start!" xml:space="preserve">
+    <value>¡Comencemos!</value>
+  </data>
+  <data name="I consent to the collection of game data to help improve the program." xml:space="preserve">
+    <value>Doy mi consentimiento para la recopilación de datos de juegos para ayudar a mejorar el programa.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="Choose one of the available languages below." xml:space="preserve">
+    <value>Elige uno de los idiomas disponibles a continuación.</value>
+  </data>
+  <data name="Sorry, your language is not supported" xml:space="preserve">
+    <value>Lo sentimos, tu idioma no es compatible</value>
+  </data>
+  <data name="Execute" xml:space="preserve">
+    <value>Ejecutar</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Abrir</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Limpiar</value>
+  </data>
+  <data name="Script Cloud" xml:space="preserve">
+    <value>Nube de guiones</value>
+  </data>
+  <data name="No enough data. play some games using Essence first!" xml:space="preserve">
+    <value>No hay suficientes datos. ¡Juega algunos juegos usando Essence primero!</value>
+  </data>
+  <data name="Community Choice" xml:space="preserve">
+    <value>Elección de la comunidad</value>
+  </data>
+  <data name="Saved Scripts" xml:space="preserve">
+    <value>Guiones guardados</value>
+  </data>
+  <data name="Less relevant results" xml:space="preserve">
+    <value>Resultados menos relevantes</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="Quick Panel" xml:space="preserve">
+    <value>Panel rápido</value>
+  </data>
+  <data name="Change your character properties, use visuals and aimbots" xml:space="preserve">
+    <value>Cambia las propiedades de tu personaje, usa efectos visuales y aimbots</value>
+  </data>
+  <data name="Server Hop" xml:space="preserve">
+    <value>Saltar de servidor</value>
+  </data>
+  <data name="Game" xml:space="preserve">
+    <value>Juego</value>
+  </data>
+  <data name="Fly" xml:space="preserve">
+    <value>Volar</value>
+  </data>
+  <data name="No Clip" xml:space="preserve">
+    <value>Noclip</value>
+  </data>
+  <data name="Mia Assistent" xml:space="preserve">
+    <value>Asistente Mia</value>
+  </data>
+  <data name="Hi! Need script help? Let's begin!" xml:space="preserve">
+    <value>¡Hola! ¿Necesitas ayuda con guiones? ¡Comencemos!</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="Essence Customization" xml:space="preserve">
+    <value>Personalización de Essence</value>
+  </data>
+  <data name="Customize your Essence experience" xml:space="preserve">
+    <value>Personaliza tu experiencia Essence</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="Change your executor language." xml:space="preserve">
+    <value>Cambia el idioma de tu ejecutor.</value>
+  </data>
+  <data name="Discord RPC" xml:space="preserve">
+    <value>RPC de Discord</value>
+  </data>
+  <data name="Enable discord activity for Essence. Yay!" xml:space="preserve">
+    <value>Habilitar la actividad de Discord para Essence. ¡Yay!</value>
+  </data>
+  <data name="Top-Most the window" xml:space="preserve">
+    <value>Mantener la ventana siempre arriba</value>
+  </data>
+  <data name="Keep Essence on top of other windows" xml:space="preserve">
+    <value>Mantener Essence arriba de otras ventanas</value>
+  </data>
+  <data name="Quick things you can change" xml:space="preserve">
+    <value>Cosas rápidas que puedes cambiar</value>
+  </data>
+  <data name="Save conversations" xml:space="preserve">
+    <value>Guardar conversaciones</value>
+  </data>
+  <data name="This option saves and loads all your chat history with Mia." xml:space="preserve">
+    <value>Esta opción guarda y carga todo tu historial de chat con Mia.</value>
+  </data>
+  <data name="Clear History" xml:space="preserve">
+    <value>Limpiar historial</value>
+  </data>
+  <data name="Delete all records of conversations with Mia" xml:space="preserve">
+    <value>Elimina todos los registros de conversaciones con Mia</value>
+  </data>
+  <data name="Monaco is an advanced editor. But, it can cause performance issues in some pc's" xml:space="preserve">
+    <value>Monaco es un editor avanzado. Pero, puede causar problemas de rendimiento en algunos PC</value>
+  </data>
+  <data name="Save your script tabs to re-load then when you open Essence again" xml:space="preserve">
+    <value>Guarda tus pestañas de guiones para recargarlas cuando vuelvas a abrir Essence</value>
+  </data>
+  <data name="Unauthorized action detected. Stop immediately to avoid further measures." xml:space="preserve">
+    <value>Acción no autorizada detectada. Detente inmediatamente para evitar medidas adicionales.</value>
+  </data>
+  <data name="Follow the rules to continue using our services." xml:space="preserve">
+    <value>Sigue las reglas para continuar utilizando nuestros servicios.</value>
+  </data>
+  <data name="We’re working to resolve the problem as quickly as possible. Thank you for your patience!" xml:space="preserve">
+    <value>Estamos trabajando para resolver el problema lo más rápido posible. ¡Gracias por su paciencia!</value>
+  </data>
+  <data name="Our servers are updating!" xml:space="preserve">
+    <value>¡Nuestros servidores se están actualizando!</value>
+  </data>
+  <data name="Please check your network settings and firewall configuration to restore access." xml:space="preserve">
+    <value>Por favor, revisa tus configuraciones de red y de tu firewall para restaurar el acceso.</value>
+  </data>
+  <data name="No Internet Connection Detected" xml:space="preserve">
+    <value>No se detectó conexión a Internet</value>
+  </data>
+  <data name="What's New" xml:space="preserve">
+    <value>¿Qué hay de nuevo?</value>
+  </data>
+  <data name="Essence Features Changelog" xml:space="preserve">
+    <value>Registro de cambios de las funciones de Essence</value>
+  </data>
+  <data name="Nice!" xml:space="preserve">
+    <value>¡Genial!</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>Horas</value>
+  </data>
+</root>

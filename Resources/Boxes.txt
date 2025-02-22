@@ -1,0 +1,110 @@
+-- Variável global para alternar o estado do script Boxes
+if _G.BoxesEnabled == nil then
+    _G.BoxesEnabled = true
+
+    -- Serviços
+    local Players = game:GetService("Players")
+    local RunService = game:GetService("RunService")
+    local LocalPlayer = Players.LocalPlayer
+    local Camera = workspace.CurrentCamera
+
+    -- Tabela para armazenar as boxes
+    _G.BoxObjects = _G.BoxObjects or {}
+
+    -- Função para criar uma box
+    local function createBox(player)
+        if player == LocalPlayer then return end -- Ignorar o jogador local
+
+        local boxOutline = Drawing.new("Square")
+        boxOutline.Thickness = 3
+        boxOutline.Transparency = 1
+        boxOutline.Color = Color3.fromRGB(0, 0, 0) -- Preto para o contorno
+        boxOutline.Visible = false
+
+        local boxFill = Drawing.new("Square")
+        boxFill.Thickness = 0
+        boxFill.Transparency = 0.5
+        boxFill.Color = Color3.fromRGB(200, 20, 20) -- Branco para o preenchimento
+        boxFill.Visible = false
+
+        -- Adicionar à tabela de boxes
+        table.insert(_G.BoxObjects, boxOutline)
+        table.insert(_G.BoxObjects, boxFill)
+
+        local function updateBox()
+            if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then
+                boxOutline.Visible = false
+                boxFill.Visible = false
+                return
+            end
+
+            local rootPart = player.Character.HumanoidRootPart
+            local humanoid = player.Character:FindFirstChild("Humanoid")
+
+            if humanoid and humanoid.Health > 0 then
+                local rootPos, onScreen = Camera:WorldToViewportPoint(rootPart.Position)
+                local headPos = rootPart.Position + Vector3.new(0, 3, 0)
+                local legPos = rootPart.Position - Vector3.new(0, 3, 0)
+
+                local headScreenPos = Camera:WorldToViewportPoint(headPos)
+                local legScreenPos = Camera:WorldToViewportPoint(legPos)
+
+                if onScreen then
+                    local boxHeight = math.abs(headScreenPos.Y - legScreenPos.Y)
+                    local boxWidth = boxHeight / 2
+
+                    boxOutline.Size = Vector2.new(boxWidth, boxHeight)
+                    boxOutline.Position = Vector2.new(
+                        rootPos.X - boxWidth / 2,
+                        headScreenPos.Y
+                    )
+                    boxOutline.Visible = true
+
+                    boxFill.Size = boxOutline.Size
+                    boxFill.Position = boxOutline.Position
+                    boxFill.Visible = true
+                else
+                    boxOutline.Visible = false
+                    boxFill.Visible = false
+                end
+            else
+                boxOutline.Visible = false
+                boxFill.Visible = false
+            end
+        end
+
+        -- Atualizar a box em cada frame
+        RunService.RenderStepped:Connect(updateBox)
+
+        -- Remover a box quando o jogador sair
+        player.AncestryChanged:Connect(function()
+            if not player:IsDescendantOf(game) then
+                boxOutline:Remove()
+                boxFill:Remove()
+            end
+        end)
+    end
+
+    -- Criar boxes para todos os jogadores no jogo
+    for _, player in ipairs(Players:GetPlayers()) do
+        createBox(player)
+    end
+
+    -- Criar boxes para jogadores que entrarem posteriormente
+    Players.PlayerAdded:Connect(function(player)
+        player.CharacterAdded:Connect(function()
+            createBox(player)
+        end)
+    end)
+
+else
+    -- Desativar e remover apenas as boxes
+    _G.BoxesEnabled = nil
+
+    if _G.BoxObjects then
+        for _, box in ipairs(_G.BoxObjects) do
+            box:Remove()
+        end
+        _G.BoxObjects = nil -- Limpar a tabela
+    end
+end

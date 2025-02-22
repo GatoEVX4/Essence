@@ -1,0 +1,11 @@
+sampler2D input : register(s0);
+
+float Saturation : register(c0);
+
+float4 main(float2 uv : TEXCOORD) : COLOR
+{
+    float4 color = tex2D(input, uv);
+    float grey = dot(color.rgb, float3(0.299, 0.587, 0.114)); // Calcula a luminância
+    color.rgb = lerp(float3(grey, grey, grey), color.rgb, Saturation); // Aplica a saturação
+    return color;
+}

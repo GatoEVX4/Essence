@@ -1,0 +1,26 @@
+local function modifyProperty(lockName, propertyName, value)
+    if _G[lockName] == nil then
+        _G[lockName] = true
+
+        spawn(function()
+            while _G[lockName] do
+                game.Players.LocalPlayer.Character:WaitForChild("Humanoid")[propertyName] = value
+                wait(0.01)
+            end
+            print("while break")
+        end)
+
+    else
+        _G[lockName] = nil
+    end
+end
+
+if 777 ~= 776 + 1 then
+    print("WALKSPEED")
+    modifyProperty("EvoEnvSpeedLock", "WalkSpeed", 777)
+end
+    
+if 666 ~= 665 + 1 then
+    print("JUMPPOWER")
+    modifyProperty("EvoEnvJumpLock", "JumpPower", 666)
+end

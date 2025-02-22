@@ -1,0 +1,135 @@
+﻿if _G.EvoEnvFPS == nil then
+    _G.EvoEnvFPS = true
+    print("FPS aumentado por Essence")
+
+    -- Feedback visual para o jogador
+    local loadingGui = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
+    local textLabel = Instance.new("TextLabel", loadingGui)
+    textLabel.Text = "Ajustando configurações para melhorar o desempenho..."
+    textLabel.Size = UDim2.new(0.5, 0, 0.1, 0)
+    textLabel.Position = UDim2.new(0.25, 0, 0.45, 0)
+    textLabel.BackgroundTransparency = 0.5
+    textLabel.BackgroundColor3 = Color3.new(0, 0, 0)
+    textLabel.TextColor3 = Color3.new(1, 1, 1)
+    textLabel.TextScaled = true
+
+    -- Armazena as configurações originais
+    local originalSettings = {
+        WaterWaveSize = game.Workspace.Terrain.WaterWaveSize,
+        WaterWaveSpeed = game.Workspace.Terrain.WaterWaveSpeed,
+        WaterReflectance = game.Workspace.Terrain.WaterReflectance,
+        WaterTransparency = game.Workspace.Terrain.WaterTransparency,
+        GlobalShadows = game.Lighting.GlobalShadows,
+        FogEnd = game.Lighting.FogEnd,
+        Brightness = game.Lighting.Brightness,
+        QualityLevel = settings().Rendering.QualityLevel
+    }
+
+    local originalPartProperties = {}
+    local originalLightingProperties = {}
+
+    local function adjustCriticalSettings()
+        local t = game.Workspace.Terrain
+        local l = game.Lighting
+
+        t.WaterWaveSize = 0
+        t.WaterWaveSpeed = 0
+        t.WaterReflectance = 0
+        t.WaterTransparency = 0
+        l.GlobalShadows = false
+        l.FogEnd = 9e9
+        l.Brightness = 0.5
+        settings().Rendering.QualityLevel = "Level01"
+    end
+
+    local function processDescendants()
+        local descendants = game:GetDescendants()
+        for i, v in ipairs(descendants) do
+            if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
+                originalPartProperties[v] = {Material = v.Material, Reflectance = v.Reflectance}
+                v.Material = "Plastic"
+                v.Reflectance = 0
+            elseif v:IsA("Decal") or v:IsA("Texture") then
+                originalPartProperties[v] = {Transparency = v.Transparency}
+                v.Transparency = 1
+            elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+                originalPartProperties[v] = {Lifetime = v.Lifetime}
+                v.Lifetime = NumberRange.new(0)
+            elseif v:IsA("Explosion") then
+                originalPartProperties[v] = {BlastPressure = v.BlastPressure, BlastRadius = v.BlastRadius}
+                v.BlastPressure = 1
+                v.BlastRadius = 1
+            elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+                originalPartProperties[v] = {Enabled = v.Enabled}
+                v.Enabled = false
+            elseif v:IsA("MeshPart") then
+                originalPartProperties[v] = {Material = v.Material, Reflectance = v.Reflectance, TextureID = v.TextureID}
+                v.Material = "Plastic"
+                v.Reflectance = 0
+                v.TextureID = 10385902758728957
+            end
+
+            -- Processa um número fixo de objetos por frame
+            if i % 100 == 0 then
+                textLabel.Text = string.format("Ajustando configurações... (%d/%d)", i, #descendants)
+                task.wait() -- Aguarda o próximo frame
+            end
+        end
+    end
+
+    local function disableLightingEffects()
+        for _, e in ipairs(game.Lighting:GetChildren()) do
+            if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
+                originalLightingProperties[e] = {Enabled = e.Enabled}
+                e.Enabled = false
+            end
+        end
+    end
+
+    adjustCriticalSettings()
+    coroutine.wrap(processDescendants)()
+    coroutine.wrap(disableLightingEffects)()
+
+    -- Remove a interface de carregamento ao finalizar
+    task.delay(5, function()
+        loadingGui:Destroy()
+    end)
+
+    _G.OriginalSettings = originalSettings
+    _G.OriginalPartProperties = originalPartProperties
+    _G.OriginalLightingProperties = originalLightingProperties
+
+else
+    -- Restaurar configurações originais
+    local originalSettings = _G.OriginalSettings
+    local originalPartProperties = _G.OriginalPartProperties
+    local originalLightingProperties = _G.OriginalLightingProperties
+
+    game.Workspace.Terrain.WaterWaveSize = originalSettings.WaterWaveSize
+    game.Workspace.Terrain.WaterWaveSpeed = originalSettings.WaterWaveSpeed
+    game.Workspace.Terrain.WaterReflectance = originalSettings.WaterReflectance
+    game.Workspace.Terrain.WaterTransparency = originalSettings.WaterTransparency
+    game.Lighting.GlobalShadows = originalSettings.GlobalShadows
+    game.Lighting.FogEnd = originalSettings.FogEnd
+    game.Lighting.Brightness = originalSettings.Brightness
+    settings().Rendering.QualityLevel = originalSettings.QualityLevel
+
+    for obj, properties in pairs(originalPartProperties) do
+        for prop, value in pairs(properties) do
+            if obj then -- Verifica se o objeto ainda existe
+                obj[prop] = value
+            end
+        end
+    end
+
+    for obj, properties in pairs(originalLightingProperties) do
+        for prop, value in pairs(properties) do
+            if obj then -- Verifica se o objeto ainda existe
+                obj[prop] = value
+            end
+        end
+    end
+
+    print("FPS restaurado por Essence")
+    _G.EvoEnvFPS = nil
+end

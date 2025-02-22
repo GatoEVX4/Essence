@@ -1,0 +1,161 @@
+local CoreGui = game:GetService("CoreGui")
+
+-- Função para verificar se uma propriedade contém "SAVAGE"
+local function containsSavage(object)
+    -- Verifica se o objeto tem uma propriedade 'Text' (para objetos de GUI, como TextLabel, TextButton, etc.)
+    if object:IsA("TextButton") or object:IsA("TextLabel") or object:IsA("TextBox") then
+        local success, value = pcall(function()
+            return object.Text
+        end)
+        if success and typeof(value) == "string" and string.find(value:upper(), "SAVAGE") then
+            return true, "Text"
+        end
+    end
+
+    -- Verifica se o objeto tem uma propriedade 'Name'
+    if typeof(object.Name) == "string" and string.find(object.Name:upper(), "SAVAGE") then
+        return true, "Name"
+    end
+
+    return false
+end
+
+-- Função para procurar e tornar invisíveis os elementos
+local function hideSavageElements(parent)
+    for _, child in ipairs(parent:GetDescendants()) do
+        local found, property = containsSavage(child)
+        if found then
+            -- Informações detalhadas sobre o objeto encontrado
+            local path = child:GetFullName() -- Obtém o caminho completo do objeto
+            --print("Tornando invisível:", path, "com 'SAVAGE' na propriedade:", property)
+            --print("Tipo do objeto:", child.ClassName)
+            --print("Nome do objeto:", child.Name)
+            print("Caminho completo:", path)
+            -- Torna o objeto invisível
+            child.Visible = false
+        end
+    end
+end
+
+-- Executa a função no CoreGui
+hideSavageElements(CoreGui)
+
+
+
+local player = game.Players.LocalPlayer
+while not player.Character or not player.Character:FindFirstChild("Humanoid") do
+    wait()
+end
+
+
+--function Export(a,b)getgenv()[a]=b end;
+--Export('identifyexecutor',function()return"Essence"end)
+--Export('getexecutorname',function()return"Essence"end)
+--setfpscap(999)
+
+local CoreGui = game:GetService("CoreGui")
+
+-- Função para verificar se uma propriedade contém "SAVAGE"
+local function containsSavage(object)
+    -- Verifica se o objeto tem uma propriedade 'Text' (para objetos de GUI, como TextLabel, TextButton, etc.)
+    if object:IsA("TextButton") or object:IsA("TextLabel") or object:IsA("TextBox") then
+        local success, value = pcall(function()
+            return object.Text
+        end)
+        if success and typeof(value) == "string" and string.find(value:upper(), "SAVAGE") then
+            return true, "Text"
+        end
+    end
+
+    -- Verifica se o objeto tem uma propriedade 'Name'
+    if typeof(object.Name) == "string" and string.find(object.Name:upper(), "SAVAGE") then
+        return true, "Name"
+    end
+
+    return false
+end
+
+-- Função para procurar e tornar invisíveis os elementos
+local function hideSavageElements(parent)
+    for _, child in ipairs(parent:GetDescendants()) do
+        local found, property = containsSavage(child)
+        if found then
+            -- Informações detalhadas sobre o objeto encontrado
+            local path = child:GetFullName() -- Obtém o caminho completo do objeto
+            --print("Tornando invisível:", path, "com 'SAVAGE' na propriedade:", property)
+            --print("Tipo do objeto:", child.ClassName)
+            --print("Nome do objeto:", child.Name)
+            print("Caminho completo:", path)
+            -- Torna o objeto invisível
+            child.Visible = false
+        end
+    end
+end
+
+-- Executa a função no CoreGui
+hideSavageElements(CoreGui)
+
+wait(1)
+
+
+if AZURE_INT_LOADED then
+    print("Essence Already loaded")
+    return
+end
+
+pcall(function() getgenv().AZURE_INT_LOADED = true end)
+
+print('Loading Essence Interactions...')
+local function GetPlayerData()
+    local MarketplaceService = game:GetService("MarketplaceService")
+    local success, productInfo = pcall(function()
+        return MarketplaceService:GetProductInfo(game.PlaceId)
+    end)
+
+    local gamename = "Unknown"
+    if success then
+        gamename = productInfo.Name
+    end
+    pcall(function()
+        writefile("Essence\\PlayerData.evolu", game.Players.LocalPlayer.DisplayName .. "\n" .. game.Players.LocalPlayer.UserId .. "\n" .. gamename .. "\n" .. game.PlaceId)
+    end)
+end
+
+
+local function onCharacterAdded(character)
+
+    local humanoid = character:WaitForChild("Humanoid")
+
+    pcall(function() writefile("Essence\\Respawn.evolu", "") end)
+    
+    pcall(function() writefile("Essence\\Jump.evolu", tostring(humanoid.JumpPower)) end)
+    pcall(function() writefile("Essence\\Speed.evolu", tostring(humanoid.WalkSpeed)) end)
+
+    humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+        pcall(function() writefile("Essence\\Speed.evolu", tostring(humanoid.WalkSpeed)) end)
+    end)
+
+    humanoid:GetPropertyChangedSignal("JumpPower"):Connect(function()
+        pcall(function() writefile("Essence\\Jump.evolu", tostring(humanoid.JumpPower)) end)
+    end)
+
+    humanoid.Died:Connect(function()
+        pcall(function() writefile("Essence\\Die.evolu", "") end)
+
+    end)
+end
+
+pcall(function()
+    player.CharacterAdded:Connect(onCharacterAdded)
+    onCharacterAdded(player.Character)
+end)
+
+player.Changed:Connect(function(property)
+    if property == "Parent" and game.Players.LocalPlayer.Parent == nil then
+        pcall(function() writefile("Essence\\Quit.evolu", "") end)
+    end
+end)
+
+pcall(function() GetPlayerData() end)
+print('Essence Interactions Loaded!')
+
